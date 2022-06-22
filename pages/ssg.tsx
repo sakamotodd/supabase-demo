@@ -1,6 +1,7 @@
 import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { Layout } from '../layout/Layout';
+import { Layout } from '../components/Layout';
+import Links from '../components/Links';
 import { Notice, Task } from '../types/types';
 import { supabase } from '../utils/supabase';
 
@@ -33,6 +34,7 @@ const Ssg: NextPage<StaticProps> = ({ tasks, notices }) => {
           );
         })}
       </ul>
+      <Links />
     </Layout>
   );
 };
@@ -41,7 +43,7 @@ export default Ssg;
 export const getStaticProps: GetStaticProps = async () => {
   console.log('getStaticProps走りました。');
   const { data: tasks } = await supabase
-    .from('todos')
+    .from('tasks')
     .select('*')
     .order('created_at', { ascending: true });
   const { data: notices } = await supabase
