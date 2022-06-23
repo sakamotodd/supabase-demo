@@ -1,17 +1,14 @@
-import React from 'react'
 import create from 'zustand';
 import { EditedNotice, EditedTask } from './types/types';
-
 
 type State = {
   editedTask: EditedTask;
   editedNotice: EditedNotice;
   updateEditedTask: (payload: EditedTask) => void;
-  //updateEditedNotice: (payload: EditedNotice) => void;
+  updateEditedNotice: (payload: EditedNotice) => void;
   resetEditedTask: () => void;
- // resetEditedNotice: () => void;
+  resetEditedNotice: () => void;
 };
-
 
 const useStore = create<State>((set) => ({
   editedTask: { id: '', title: '' },
@@ -24,14 +21,14 @@ const useStore = create<State>((set) => ({
       },
     }),
   resetEditedTask: () => set({ editedTask: { id: '', title: '' } }),
-  // updateEditedNotice: (payload) =>
-  //   set({
-  //     editedNotice: {
-  //       id: payload.id,
-  //       content: payload.content,
-  //     },
-  //   }),
-  // resetEditedNotice: () => set({ editedNotice: { id: '', content: '' } }),
+  updateEditedNotice: (payload) =>
+    set({
+      editedNotice: {
+        id: payload.id,
+        content: payload.content,
+      },
+    }),
+  resetEditedNotice: () => set({ editedNotice: { id: '', content: '' } }),
 }));
 
-export default useStore
+export default useStore;
